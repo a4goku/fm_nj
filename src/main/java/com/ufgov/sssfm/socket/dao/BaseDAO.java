@@ -3,8 +3,6 @@ package com.ufgov.sssfm.socket.dao;
 
 
 import com.ufgov.sssfm.socket.constant.Constant;
-import com.ufgov.sssfm.socket.utils.ConvertUtil;
-import com.ufgov.sssfm.socket.utils.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
