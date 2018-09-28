@@ -1,0 +1,124 @@
+/*全局*/
+#workspace{
+    padding:10px;
+}
+.btn{
+    padding: 4px 12px!important;
+}
+/*头部*/
+.collect{
+    height: 50px;
+}
+.collect div{
+    float: left;
+    margin-right: 10px;
+}
+/*center*/
+.center{
+    clear: both;
+    margin-top: 20px;
+}
+#myTabContent{
+    padding-top: 15px;
+}
+.glyphicon-time{
+    left: -25px;
+    cursor: pointer;
+}
+.datetimepicker{
+    border: 1px solid #BBBBBB;
+}
+/*模态框*/
+#win{
+    width:100%;
+    height:100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+/*编辑页面*/
+#win{
+    overflow-y: auto;
+}
+#win input{
+    font-weight: bold;
+}
+.editPage{
+    width: 100%;
+}
+.editTitleCont{
+    margin: 0 auto;
+}
+    /*调整编辑页面标题Input样式*/
+.editInput,.editInputL{
+    width: 70px;
+    border: 0;
+    border-bottom: 1px solid #0e9aef;
+    outline: none;
+    text-align: center;
+    vertical-align: bottom;
+}
+.editInputL{
+    width:200px!important;
+}
+.editTipCont{
+    width: 90%;
+    margin:20px auto;
+    overflow: hidden;
+}
+    /*编辑页面内的表格区域样式*/
+.editTable{
+    width: 90%;
+    margin: 0 auto;
+}
+/*短中长表格内Input*/
+.tableInput,.tableInputSS,.tableInputS,.tableInputM,.tableInputL{
+    width: 100px;
+    border: 0;
+    /*border-bottom: 1px solid #0e9aef;*/
+    outline: none;
+    text-align: center;
+    vertical-align: bottom;
+}
+.tableInputSS{
+    width: 20px!important;
+}
+.tableInputS{
+    width: 150px!important;
+}
+.tableInputM{
+    width: 300px!important;
+}
+.tableInputL{
+    width: 400px!important;
+}
+
+/*加载等待*/
+.loading {
+    width: 160px;
+    height: 56px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    line-height: 56px;
+    color: #fff;
+    padding-left: 60px;
+    font-size: 15px;
+    background: #000 url(../../../img/loading2.gif) no-repeat 10px 50%;
+    opacity: 0.7;
+    z-index: 9999;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+/*去掉分页信息*/
+.pull-right.pagination-detail{
+    display:none;
+}
+/*取消bootstrap自动换行*/
+#firstTable td,#secondTable td{
+    white-space :nowrap
+}

@@ -1,0 +1,45 @@
+/*全局*/
+#workspace{
+	padding:10px;
+}
+.btn{
+	padding: 4px 12px!important;
+}
+/*头部*/
+.collect{
+	height: 50px;
+}
+.collect div{
+	float: left;
+	margin-right: 10px;
+}
+#btn-query{
+	padding: 4px 12px;
+}
+/*center*/
+.center{
+	clear: both;
+}
+.glyphicon-time{
+	left: -25px;
+	cursor: pointer;
+}
+.datetimepicker{
+	border: 1px solid #BBBBBB;
+}
+/*模态框*/
+#win{
+	width:100%;
+	height:100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+/*控制下拉列表下拉框最大高度*/
+ul.dropdown-menu{
+	max-height: 200px!important;
+}
+td{
+	white-space :nowrap
+}

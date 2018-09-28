@@ -1,0 +1,67 @@
+/*全局*/
+#workspace{
+    padding:10px;
+}
+.btn{
+    padding: 4px 12px!important;
+}
+/*头部*/
+.collect{
+    height: 50px;
+}
+.collect div{
+    float: left;
+    margin-right: 10px;
+}
+/*center*/
+.center{
+    clear: both;
+    margin-top: 20px;
+}
+#myTabContent{
+    padding-top: 15px;
+}
+.glyphicon-time{
+    left: -25px;
+    cursor: pointer;
+}
+.datetimepicker{
+    border: 1px solid #BBBBBB;
+}
+/*模态框*/
+#win,#winTwo{
+    width:100%;
+    height:100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+/*控制下拉列表下拉框最大高度*/
+ul.dropdown-menu{
+    max-height: 200px!important;
+}
+/*加载等待*/
+.loading {
+    width: 160px;
+    height: 56px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    line-height: 56px;
+    color: #fff;
+    padding-left: 60px;
+    font-size: 15px;
+    background: #000 url(../../../img/loading2.gif) no-repeat 10px 50%;
+    opacity: 0.7;
+    z-index: 9999;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+/*取消bootstrap自动换行*/
+td{
+    white-space :nowrap
+}
