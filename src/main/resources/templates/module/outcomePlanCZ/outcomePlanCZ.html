@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>应征计划发财政</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!--引入公共CSS JS文件-->
+    <link rel="stylesheet" th:href="@{/css/resource/jquery-confirm.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/resource/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/css/resource/bootstrap-datetimepicker.min.css}">
+    <link rel="stylesheet" th:href="@{/css/resource/bootstrap-select.min.css}">
+    <link rel="stylesheet" th:href="@{/css/modules/outcomePlanCZ/outcomePlanCZ.css}">
+</head>
+<body>
+<div id="workspace">
+    <div class="box">
+        <!--头部-->
+        <div class="header">
+            <div class="collect">
+                <!--下拉框-->
+                <div class="safeChoices">
+                    <span>险种：</span>
+                    <select id="safeSelect" class="selectpicker"></select>
+                </div>
+                <div class="bfChoices">
+                    <span>拨付方式：</span>
+                    <select id="bfSelect" class="selectpicker"></select>
+                </div>
+                <div class="month">
+                    <span>拨付时间：</span>
+                    <input type="text" class="datetimepicker" size="20">
+                    <span class="glyphicon glyphicon-time"></span>
+                </div>
+                <div class="queryModel">
+                    <button id="btn-query" class="btn btn-primary">查询</button>
+                </div>
+            </div>
+            <div class="collectTwo">
+                <div class="bankChoices">
+                    <span>银行编码：</span>
+                    <select id="bankSelect" class="selectpicker"></select>
+                </div>
+            </div>
+        </div>
+        <!--center-->
+        <div class="center">
+            <!--页签-->
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#notSend" data-toggle="tab">未发财政</a>
+                </li>
+                <li><a href="#hadSend" data-toggle="tab">已发财政</a></li>
+                <li><a href="#alls" data-toggle="tab">全部</a></li>
+            </ul>
+            <!--页签内容-->
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="notSend">
+                    <table id="firstTable"></table>
+                </div>
+                <div class="tab-pane fade" id="hadSend">
+                    <table id="secondTable"></table>
+                </div>
+                <div class="tab-pane fade" id="alls">
+                    <table id="thirdTable"></table>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group" style="position: fixed;top:115px;right: 10px">
+            <button class="btn btn-primary" id="btn-sendCZ">发财政</button>
+        </div>
+    </div>
+</div>
+
+<!--明细数据模态框-->
+<div class="modal fade" id="win" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:90%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">子表明细数据</h4>
+            </div>
+            <div class="modal-body">
+                <table id="clickData" style="width:inherit;"></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div class="modal fade" id="winTwo" tabindex="-1" role="dialog" aria-labelledby="myModalLabelTwo" aria-hidden="true">
+    <div class="modal-dialog" style="width:90%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabelTwo">孙子表明细数据</h4>
+            </div>
+            <div class="modal-body">
+                <table id="clickDataSon" style="width:inherit;"></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!--加载等待-->
+<div id="myModal" class="modal fade" data-keyboard="false"
+     data-backdrop="static" data-role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="loading" class="loading">发送中。。。</div>
+</div>
+
+<!--此下内连写法的js为获取项目根路径的方法，ctx需要加载请求路径上-->
+<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/resource/jquery-confirm.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-table.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-table-locale-all.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-select.min.js}"></script>
+<script th:src="@{/js/resource/commonJS.js}"></script>
+<script th:src="@{/js/modules/outcomePlanCZ/outcomePlanCZ.js}"></script>
+</body>
+</html>

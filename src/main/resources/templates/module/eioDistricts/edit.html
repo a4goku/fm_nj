@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-eioDistricts-edit" th:object="${eioDistricts}">
+            <input id="nD" name="nD" th:field="*{nD}"  type="hidden">
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">行政区划代码：</label>
+                <div class="col-sm-8">
+                    <input id="distCode" name="distCode" th:field="*{distCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">行政区划名称：</label>
+                <div class="col-sm-8">
+                    <input id="distName" name="distName" th:field="*{distName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">单位代码：</label>
+                <div class="col-sm-8">
+                    <input id="coCode" name="coCode" th:field="*{coCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">单位名称：</label>
+                <div class="col-sm-8">
+                    <input id="coName" name="coName" th:field="*{coName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">是否财政直管县：</label>
+                <div class="col-sm-8">
+                    <input id="isPfManage" name="isPfManage" th:field="*{isPfManage}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">是否贫困县：</label>
+                <div class="col-sm-8">
+                    <input id="isPoor" name="isPoor" th:field="*{isPoor}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">贫困县类别：</label>
+                <div class="col-sm-8">
+                    <input id="poorType" name="poorType" th:field="*{poorType}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">是否资源枯竭工矿区：</label>
+                <div class="col-sm-8">
+                    <input id="isResdepArea" name="isResdepArea" th:field="*{isResdepArea}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">录入人ID：</label>
+                <div class="col-sm-8">
+                    <input id="inputorId" name="inputorId" th:field="*{inputorId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">录入人：</label>
+                <div class="col-sm-8">
+                    <input id="inputorName" name="inputorName" th:field="*{inputorName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">录入日期：</label>
+                <div class="col-sm-8">
+                    <input id="cDATE" name="cDATE" th:field="*{cDATE}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input id="rEMARK" name="rEMARK" th:field="*{rEMARK}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">：</label>
+                <div class="col-sm-8">
+                    <input id="createBatch" name="createBatch" th:field="*{createBatch}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">：</label>
+                <div class="col-sm-8">
+                    <input id="splitBatch" name="splitBatch" th:field="*{splitBatch}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">：</label>
+                <div class="col-sm-8">
+                    <input id="logicPDistCode" name="logicPDistCode" th:field="*{logicPDistCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">是否可用：</label>
+                <div class="col-sm-8">
+                    <input id="isUsed" name="isUsed" th:field="*{isUsed}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">父代码：</label>
+                <div class="col-sm-8">
+                    <input id="pDistCode" name="pDistCode" th:field="*{pDistCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">级次：</label>
+                <div class="col-sm-8">
+                    <input id="levelNum" name="levelNum" th:field="*{levelNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">是否末级：</label>
+                <div class="col-sm-8">
+                    <input id="isLeaf" name="isLeaf" th:field="*{isLeaf}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">国定贫困县：</label>
+                <div class="col-sm-8">
+                    <input id="isPoorCountry" name="isPoorCountry" th:field="*{isPoorCountry}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">省定贫困县：</label>
+                <div class="col-sm-8">
+                    <input id="isPoorPro" name="isPoorPro" th:field="*{isPoorPro}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">燕山太行山连片贫困县：</label>
+                <div class="col-sm-8">
+                    <input id="isPoorOther" name="isPoorOther" th:field="*{isPoorOther}" class="form-control" type="text">
+                </div>
+            </div>
+			<div class="form-group">
+				<div class="form-control-static col-sm-offset-9">
+					<button type="submit" class="btn btn-primary">提交</button>
+					<button onclick="$.modal.close()" class="btn btn-danger" type="button">关闭</button>
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "module/eioDistricts"
+		$("#form-eioDistricts-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			},
+			submitHandler: function(form) {
+				$.operate.save(prefix + "/edit", $('#form-eioDistricts-edit').serialize());
+			}
+		});
+	</script>
+</body>
+</html>

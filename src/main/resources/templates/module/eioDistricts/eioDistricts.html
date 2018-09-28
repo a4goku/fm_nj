@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    <div class="container-div">
+		<div class="btn-group hidden-xs" id="toolbar" role="group">
+			<a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()" shiro:hasPermission="module:eioDistricts:add">
+				<i class="fa fa-plus"></i> 新增
+			</a>
+			<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()" shiro:hasPermission="module:eioDistricts:remove">
+				<i class="fa fa-trash-o"></i> 删除
+			</a>
+		</div>
+			
+		<div class="col-sm-12 select-info table-striped">
+			<table id="bootstrap-table" data-mobile-responsive="true"></table>
+		</div>
+    </div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('module:eioDistricts:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('module:eioDistricts:remove')}]];
+        var prefix = ctx + "module/eioDistricts"
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                modalName: "基金委托运营地区",
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'nD', 
+					title : '年度' 
+				},
+				{
+					field : 'distCode', 
+					title : '区划代码'
+				},
+				{
+					field : 'distName', 
+					title : '区划名称'
+				},
+				/*{
+					field : 'coCode', 
+					title : '单位代码' 
+				},
+				{
+					field : 'coName', 
+					title : '单位名称' 
+				},*/
+				{
+					field : 'isPfManage', 
+					title : '是否财政直管县' 
+				},
+				{
+					field : 'isPoor', 
+					title : '是否贫困县' 
+				},
+				{
+					field : 'poorType', 
+					title : '贫困县类别' 
+				},
+				{
+					field : 'isResdepArea', 
+					title : '是否资源枯竭工矿区' 
+				},
+				/*{
+					field : 'inputorId', 
+					title : '录入人ID' 
+				},
+				{
+					field : 'inputorName', 
+					title : '录入人' 
+				},*/
+				/*{
+					field : 'cDATE', 
+					title : '录入日期' 
+				},
+				{
+					field : 'rEMARK', 
+					title : '备注' 
+				},*/
+				/*{
+					field : 'createBatch', 
+					title : '' 
+				},
+				{
+					field : 'splitBatch', 
+					title : '' 
+				},
+				{
+					field : 'logicPDistCode', 
+					title : '' 
+				},*/
+				{
+					field : 'isUsed', 
+					title : '是否可用' 
+				},
+				/*{
+					field : 'pDistCode', 
+					title : '父代码' 
+				},
+				{
+					field : 'levelNum', 
+					title : '级次' 
+				},
+				{
+					field : 'isLeaf', 
+					title : '是否末级' 
+				},*/
+				{
+					field : 'isPoorCountry', 
+					title : '国定贫困县' 
+				},
+				{
+					field : 'isPoorPro', 
+					title : '省定贫困县' 
+				},
+				{
+					field : 'isPoorOther', 
+					title : '燕山太行山连片贫困县' 
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.distCode + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.distCode + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

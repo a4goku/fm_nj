@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>应征计划发财政</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!--引入公共CSS JS文件-->
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/css/resource/bootstrap-table.min.css}">
+		<link rel="stylesheet" th:href="@{/css/resource/bootstrap-datetimepicker.min.css}">
+		<link rel="stylesheet" th:href="@{/css/resource/bootstrap-select.min.css}">
+		<link rel="stylesheet" th:href="@{/css/modules/incomePlanCZ/incomePlanCZ.css}">
+	</head>
+	<body>
+		<div id="workspace">
+			<div class="box">
+				<!--头部-->
+				<div class="header">
+					<div class="collect">
+						<!--下拉框-->
+						<div class="safeChoices">
+							<span>险种：</span>
+							<select id="safeSelect" class="selectpicker"></select>
+						</div>
+						<div class="jfChoices">
+							<span>业务编码：</span>
+							<select id="jfSelect" class="selectpicker"></select>
+						</div>
+						<div class="month">
+							<span>所属月份：</span>
+							<input type="text" class="datetimepicker" size="20">
+							<span class="glyphicon glyphicon-time"></span>
+						</div>
+						<div class="queryModel">
+							<button id="btn-query" class="btn btn-primary">查询</button>
+						</div>
+					</div>
+				</div>
+				<!--center-->
+				<div class="center">
+					<table id="firstTable"></table>
+				</div>
+			</div>
+		</div>
+
+		<!--明细数据模态框-->
+		<div class="modal fade" id="win" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width:90%">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">明细数据</h4>
+					</div>
+					<div class="modal-body">
+						<table id="clickData" style="width:inherit;">
+							<tr>
+								<td>123</td>
+								<td>123</td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+
+		<!--此下内连写法的js为获取项目根路径的方法，ctx需要加载请求路径上-->
+		<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+		<script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/resource/bootstrap-table.min.js}"></script>
+		<script th:src="@{/js/resource/bootstrap-table-locale-all.min.js}"></script>
+		<script th:src="@{/js/resource/bootstrap-datetimepicker.min.js}"></script>
+		<script th:src="@{/js/resource/bootstrap-select.min.js}"></script>
+		<script th:src="@{/js/resource/commonJS.js}"></script>
+		<script th:src="@{/js/modules/incomePlanCZ/incomePlanCZ.js}"></script>
+	</body>
+</html>

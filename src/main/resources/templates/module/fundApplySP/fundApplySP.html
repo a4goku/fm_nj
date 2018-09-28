@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>基金拨付申请审批</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!--引入公共CSS JS文件-->
+    <link rel="stylesheet" th:href="@{/css/resource/jquery-confirm.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/resource/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/css/resource/bootstrap-datetimepicker.min.css}">
+    <link rel="stylesheet" th:href="@{/css/modules/fundApplySH/fundApplySH.css}">
+</head>
+<body>
+<div id="workspace">
+    <div class="box">
+        <!--头部-->
+        <div class="header">
+            <div class="collect">
+                <!--下拉框-->
+                <div class="month">
+                    <span>编制日期：</span>
+                    <input type="text" class="datetimepicker" size="20" id="startTime">
+                    <span class="glyphicon glyphicon-time" id="timeIconOne"></span>
+                    <span style="left: -9px;position: relative;">至</span>
+                    <input type="text" class="datetimepicker" size="20" id="endTime">
+                    <span class="glyphicon glyphicon-time" id="timeIconTwo"></span>
+                </div>
+                <div class="queryModel">
+                    <button id="btn-query" class="btn btn-primary">查询</button>
+                </div>
+            </div>
+        </div>
+        <!--center-->
+        <div class="center">
+            <table id="firstTable"></table>
+        </div>
+    </div>
+</div>
+
+<!--明细数据模态框-->
+<div class="modal fade" id="win" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:90%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">关闭</button>
+                <h4 class="modal-title" id="myModalLabel">查看拨款申请单</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="editPage">
+                    <!--标题-->
+                    <div class="editTitle">
+                        <div class="editTitleCont text-center">
+                            <h3>
+                                宁夏回族自治区社会保障基金用款申请表
+                            </h3>
+                        </div>
+                    </div>
+                    <!--提示信息-->
+                    <div class="editTip">
+                        <div class="editTipCont">
+                            <div class="pull-left">
+                                <b>申请单位盖章：</b>
+                            </div>
+                            <div class="pull-right">
+                                <b>申请时间：</b>
+                                <input class="editInput" id="year" autocomplete="off"><b>年</b>
+                                <input class="editInput" id="month" autocomplete="off"><b>月</b>
+                                <input class="editInput" id="day" autocomplete="off"><b>日</b>
+                            </div>
+                        </div>
+                        <div class="editTipCont">
+                            <div class="pull-left">
+                                <b>险种：</b>
+                                <input class="editInputL" type="text" id="xz" autocomplete="off">
+                            </div>
+                            <div class="pull-right">
+                                <b>单位：万元</b>
+                            </div>
+                        </div>
+                    </div>
+                    <!--表格-->
+                    <div class="editTable">
+                        <table class="table table-bordered table-condensed">
+                            <tr class="text-center">
+                                <td>上年结余资金</td>
+                                <td>本年预算支出</td>
+                                <td>本年累计拨款</td>
+                                <td>1-<input type="text" class="tableInputSS" id="monthend" autocomplete="off">月累计用款金额</td>
+                                <td>上月末账面结余资金</td>
+                                <td>本月申请拨款金额</td>
+                                <td>备注</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td><input type="text" class="tableInput" id="lastyearlast" autocomplete="off"> </td>
+                                <td><input type="text" class="tableInput" id="thisyearpre" autocomplete="off"></td>
+                                <td><input type="text" class="tableInput" id="thisyearplus" autocomplete="off"></td>
+                                <td><input type="text" class="tableInput" id="monthplus" autocomplete="off"></td>
+                                <td><input type="text" class="tableInput" id="lastmonthlast" autocomplete="off"></td>
+                                <td><input type="text" class="tableInput" id="thismonthapply" autocomplete="off"></td>
+                                <td><input type="text" class="tableInput" id="bz" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="4">特殊情况拨款</td>
+                                <td><input type="text" class="tableInput" id="tsbkone" autocomplete="off"></td>
+                                <td><input type="text" class="tableInput" id="tsbktwo" autocomplete="off"></td>
+                                <td><input type="text" class="tableInput" id="tsbkthree" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td rowspan="3">申请单位单位银行账户信息</td>
+                                <td colspan="2">账户名称</td>
+                                <td colspan="4"><input type="text" class="tableInputL" id="accountone" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="2">银行账号</td>
+                                <td colspan="4"><input type="text" class="tableInputL" id="batchnoone" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="2">开户银行</td>
+                                <td colspan="4"><input type="text" class="tableInputL" id="bankone" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="3">财政业务（处）科室审核金额</td>
+                                <td colspan="3">大写：<input type="text" class="tableInputM" id="moneybig" autocomplete="off"></td>
+                                <td>小写：<input type="text" class="tableInput" id="moneysmall" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td rowspan="3">财政专户银行账户信息</td>
+                                <td colspan="2">账户名称</td>
+                                <td colspan="4"><input type="text" class="tableInputL" id="accounttwo" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="2">银行账号</td>
+                                <td colspan="4"><input type="text" class="tableInputL" id="batchnotwo" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="2">开户银行</td>
+                                <td colspan="4"><input type="text" class="tableInputL" id="banktwo" autocomplete="off"></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="3">申请单位审批(自动录入)</td>
+                                <td colspan="2">财政社保部门审批(自动录入)</td>
+                                <td colspan="2">财政国库科审批(自动录入)</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="3">负责人：<span id="sqdwfzr"></span></td>
+                                <td colspan="2">业务主管：<span id="czsbzg"></span></td>
+                                <td colspan="2">财政专户会计：<span id="gkone"></span></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="3">审核人：<span id="sqdwshr"></span></td>
+                                <td colspan="2">审核人：<span id="czsbshr"></span></td>
+                                <td colspan="2"><span id="gktwo"></span></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="3">经办人：<span id="sqdwjbr"></span></td>
+                                <td colspan="2">分管领导：<span id="czsbld"></span></td>
+                                <td colspan="2"><span id="gkthree"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!--加载等待-->
+<div id="myModal" class="modal fade" data-keyboard="false"
+     data-backdrop="static" data-role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="loading" class="loading">处理中。。。</div>
+</div>
+
+<!--审批日志-->
+<div id="daily" style="display: none">
+    <div class="center">
+        <table id="dailyTable"></table>
+    </div>
+</div>
+
+<!--此下内连写法的js为获取项目根路径的方法，ctx需要加载请求路径上-->
+<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/resource/jquery-confirm.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-table.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-table-locale-all.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/resource/commonJS.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script th:src="@{/js/modules/fundApplySP/fundApplySP.js}"></script>
+</body>
+</html>

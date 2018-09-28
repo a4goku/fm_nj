@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>医疗、工伤保险调剂金</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!--引入公共CSS JS文件-->
+    <link rel="stylesheet" th:href="@{/css/resource/jquery-confirm.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/resource/bootstrap-table.min.css}">
+    <link rel="stylesheet" th:href="@{/css/resource/bootstrap-datetimepicker.min.css}">
+    <link rel="stylesheet" th:href="@{/css/resource/bootstrap-editable.min.css}">
+    <link rel="stylesheet" th:href="@{/css/modules/medicalAdjust/medicalAdjust.css}">
+</head>
+<body>
+<div id="workspace">
+    <div class="box">
+        <!--头部-->
+        <div class="header">
+            <div class="collect">
+                <!--下拉框-->
+                <div class="month">
+                    <span>编制日期：</span>
+                    <input type="text" class="datetimepicker" size="20" id="startTime">
+                    <span class="glyphicon glyphicon-time" id="timeIconOne"></span>
+                    <span style="left: -9px;position: relative;">至</span>
+                    <input type="text" class="datetimepicker" size="20" id="endTime">
+                    <span class="glyphicon glyphicon-time" id="timeIconTwo"></span>
+                </div>
+                <div class="queryModel">
+                    <button id="btn-query" class="btn btn-primary">查询</button>
+                    <button id="btn-add" class="btn btn-primary">新增</button>
+                    <!--<button id="btn-appendix" class="btn btn-primary">附件</button>-->
+                    <button id="btn-sendCZ" class="btn btn-primary">发财政</button>
+                </div>
+            </div>
+        </div>
+        <!--center-->
+        <div class="center">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#notSend" data-toggle="tab">未发财政</a>
+                </li>
+                <li><a href="#hadSend" data-toggle="tab">已发财政</a></li>
+            </ul>
+            <!--页签内容-->
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="notSend">
+                    <table id="firstTable"></table>
+                </div>
+                <div class="tab-pane fade" id="hadSend">
+                    <table id="secondTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--明细数据模态框-->
+<div class="modal fade" id="win" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:90%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal" style="margin-left: 10px;">关闭</button>
+                <button type="button" class="btn btn-primary pull-right" id="btn-save">保存</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="editPage">
+                    <!--标题-->
+                    <div class="editTitle">
+                        <div class="editTitleCont text-center">
+                            <h3>
+                                <input class="titleInput" id="year" autocomplete="off">
+                                <span>年</span>
+                                <input class="titleInput" id="quarter" autocomplete="off">
+                                <span>季度基本医疗、工伤保险调剂金审核拨款表</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <!--提示信息-->
+                    <div class="editTip">
+                        <div class="editTipCont">
+                            <div class="pull-left">
+                                <b>编制单位：宁夏回族自治区社会保险事业管理局</b>
+                            </div>
+                        </div>
+                        <div class="editTipCont">
+                            <div class="pull-left">
+                                <b>险种：</b>
+                                <input class="titleInput" id="safe" autocomplete="off">
+                            </div>
+                            <div class="pull-right">
+                                <b>单位：万元</b>
+                            </div>
+                        </div>
+                    </div>
+                    <!--表格-->
+                    <div class="editTable">
+                        <table id="modalTable">
+                        </table>
+                        <div class="text-center appendRow">
+                            <button class="btn btn-primary btn-plus">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </button>
+                            <button class="btn btn-primary btn-minus">
+                                <i class="glyphicon glyphicon-minus"></i>
+                            </button>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <td>区社保局局长：<span id="sbjz"></span> </td>
+                                <td>区社保局主管领导：<span id="sbld"></span> </td>
+                                <td colspan="2">自治区财政厅领导：<span id="czld"></span> </td>
+                            </tr>
+                            <tr>
+                                <td>区社保局处长：<span id="sbcz"></span> </td>
+                                <td>区社保局经办人：<span id="sbjbr"></span> </td>
+                                <td>财政厅社保中心主任：<span id="czzr"></span> </td>
+                                <td>财政厅社保中心经办人：<span id="czjbr"></span> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">编制日期：<input class="tableInput" id="bzDate"> </td>
+                                <td colspan="2">审核日期：<input class="tableInput" id="shDate"> </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="editTip">
+                        <div class="editTipCont">
+                            <b>说明：基金收入、支出均不含上级补助收入、下级上解收入、补助下级支出及上解上级支出。</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!--加载等待-->
+<div id="myModal" class="modal fade" data-keyboard="false"
+     data-backdrop="static" data-role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="loading" class="loading">处理中。。。</div>
+</div>
+
+<!--此下内连写法的js为获取项目根路径的方法，ctx需要加载请求路径上-->
+<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/resource/jquery-confirm.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-table.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-table-locale-all.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-editable.min.js}"></script>
+<script th:src="@{/js/resource/bootstrap-table-editable.min.js}"></script>
+<script th:src="@{/js/resource/commonJS.js}"></script>
+<script th:src="@{/js/modules/medicalAdjust/medicalAdjust.js}"></script>
+</body>
+</html>
