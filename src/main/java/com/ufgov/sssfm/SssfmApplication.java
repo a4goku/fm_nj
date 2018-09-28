@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 
-public class SssfmApplication {
+public class SssfmApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         //SpringApplication.run(SssfmApplication.class, args);
