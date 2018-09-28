@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.sssfm.project.module.medicalAdjust.mapper.MedicalAdjustMapper">
+
+    <resultMap id="MedicalResultMap" type="com.ufgov.sssfm.project.module.medicalAdjust.entity.FmMedicalAdjust">
+        <result column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="XZ" jdbcType="VARCHAR" property="xz" />
+        <result column="YEAR" jdbcType="VARCHAR" property="year" />
+        <result column="QUARTER" jdbcType="VARCHAR" property="quarter" />
+        <result column="TJJ_QUARTER" jdbcType="VARCHAR" property="tjjQuarter" />
+        <result column="LJJY_QUARTER" jdbcType="VARCHAR" property="ljjyQuarter" />
+        <result column="SBSHJE_QUARTER" jdbcType="VARCHAR" property="sbshjeQuarter" />
+        <result column="CZSDJE_QUARTER" jdbcType="VARCHAR" property="czsdjeQuarter" />
+        <result column="SBJZ" jdbcType="VARCHAR" property="sbjz" />
+        <result column="SBLD" jdbcType="VARCHAR" property="sbld" />
+        <result column="SBCZ" jdbcType="VARCHAR" property="sbcz" />
+        <result column="SBJBR" jdbcType="VARCHAR" property="sbjbr" />
+        <result column="CZLD" jdbcType="VARCHAR" property="czld" />
+        <result column="CZZR" jdbcType="VARCHAR" property="czzr" />
+        <result column="CZJBR" jdbcType="VARCHAR" property="czjbr" />
+        <result column="BZDATE" jdbcType="VARCHAR" property="bzdate" />
+        <result column="SHDATE" jdbcType="VARCHAR" property="shdate" />
+        <result column="SP_STATUS" jdbcType="VARCHAR" property="spStatus" />
+        <result column="SEND_STATUS" jdbcType="VARCHAR" property="sendStatus" />
+    </resultMap>
+
+    <resultMap id="ItemResultMap" type="com.ufgov.sssfm.project.module.medicalAdjust.entity.FmMedicalAdjustItem">
+        <result column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="ITEMID" jdbcType="VARCHAR" property="itemid" />
+        <result column="DWMC" jdbcType="VARCHAR" property="dwmc" />
+        <result column="SNJJLJJY" jdbcType="VARCHAR" property="snjjljjy" />
+        <result column="DNYSSR" jdbcType="VARCHAR" property="dnyssr" />
+        <result column="QZBFSR" jdbcType="VARCHAR" property="qzbfsr" />
+        <result column="DNYSZC" jdbcType="VARCHAR" property="dnyszc" />
+        <result column="DNYSYTJBZJE" jdbcType="VARCHAR" property="dnysytjbzje" />
+        <result column="DNYTJBZJE" jdbcType="VARCHAR" property="dnytjbzje" />
+        <result column="DNJJLJJY" jdbcType="VARCHAR" property="dnjjljjy" />
+        <result column="DNJJYJZC" jdbcType="VARCHAR" property="dnjjyjzc" />
+        <result column="SXSQTJJE" jdbcType="VARCHAR" property="sxsqtjje" />
+        <result column="YJLJJYJE" jdbcType="VARCHAR" property="yjljjyje" />
+        <result column="SBJSHTJJE" jdbcType="VARCHAR" property="sbjshtjje" />
+        <result column="CZSDBKJE" jdbcType="VARCHAR" property="czsdbkje" />
+    </resultMap>
+    <insert id="insert_fmMedicalAdjust" parameterType="com.ufgov.sssfm.project.module.medicalAdjust.entity.FmMedicalAdjust">
+            insert into fm_medical_adjust_gold (ID, XZ, YEAR,
+              QUARTER, TJJ_QUARTER, LJJY_QUARTER,
+              SBSHJE_QUARTER, CZSDJE_QUARTER, SBJZ,
+              SBLD, SBCZ, SBJBR,
+              CZLD, CZZR, CZJBR,
+              BZDATE, SHDATE, SP_STATUS,
+              SEND_STATUS)
+            values (#{id,jdbcType=VARCHAR}, #{xz,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
+              #{quarter,jdbcType=VARCHAR}, #{tjjQuarter,jdbcType=VARCHAR}, #{ljjyQuarter,jdbcType=VARCHAR},
+              #{sbshjeQuarter,jdbcType=VARCHAR}, #{czsdjeQuarter,jdbcType=VARCHAR}, #{sbjz,jdbcType=VARCHAR},
+              #{sbld,jdbcType=VARCHAR}, #{sbcz,jdbcType=VARCHAR}, #{sbjbr,jdbcType=VARCHAR},
+              #{czld,jdbcType=VARCHAR}, #{czzr,jdbcType=VARCHAR}, #{czjbr,jdbcType=VARCHAR},
+              #{bzdate,jdbcType=VARCHAR}, #{shdate,jdbcType=VARCHAR}, #{spStatus,jdbcType=VARCHAR},
+              #{sendStatus,jdbcType=VARCHAR})
+  </insert>
+
+    <insert id="insert_fmMedicalAdjustItem" parameterType="com.ufgov.sssfm.project.module.medicalAdjust.entity.FmMedicalAdjustItem">
+            insert into fm_medical_adjust_gold_item (ID, ITEMID, DWMC,
+              SNJJLJJY, DNYSSR, QZBFSR,
+              DNYSZC, DNYSYTJBZJE, DNYTJBZJE,
+              DNJJLJJY, DNJJYJZC, SXSQTJJE,
+              YJLJJYJE, SBJSHTJJE, CZSDBKJE
+              )
+            values (#{id,jdbcType=VARCHAR}, #{itemid,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR},
+              #{snjjljjy,jdbcType=VARCHAR}, #{dnyssr,jdbcType=VARCHAR}, #{qzbfsr,jdbcType=VARCHAR},
+              #{dnyszc,jdbcType=VARCHAR}, #{dnysytjbzje,jdbcType=VARCHAR}, #{dnytjbzje,jdbcType=VARCHAR},
+              #{dnjjljjy,jdbcType=VARCHAR}, #{dnjjyjzc,jdbcType=VARCHAR}, #{sxsqtjje,jdbcType=VARCHAR},
+              #{yjljjyje,jdbcType=VARCHAR}, #{sbjshtjje,jdbcType=VARCHAR}, #{czsdbkje,jdbcType=VARCHAR}
+      )
+  </insert>
+
+    <select id="query_medicalAdjust_pagedata" parameterType="java.util.Map"  resultType="java.util.Map" >
+            select ID, XZ, YEAR,
+            QUARTER, TJJ_QUARTER, LJJY_QUARTER,
+            SBSHJE_QUARTER, CZSDJE_QUARTER, SBJZ,
+            SBLD, SBCZ, SBJBR,
+            CZLD, CZZR, CZJBR,
+            BZDATE, SHDATE, SP_STATUS,
+            SEND_STATUS ,b.val SP_STATUS_NAME from fm_medical_adjust_gold a,fm_as_val b
+            <where>
+                a.SP_STATUS=b.VAL_ID and b.VALSET_ID='SP_STATUS'
+                <if test="send_status !=null">
+                    and SEND_STATUS=#{send_status}
+                </if>
+                <if test="sp_status =='01'">
+                    and SP_STATUS in('01','02','03')
+                </if>
+                <if test="sp_status =='02'">
+                    and SP_STATUS in('02','03')
+                </if>
+                <if test="(timeStart !=null and timeStart != '')"><!-- 开始时间检索 -->
+                    and date_format(BZDATE,'%y%m%d')>= date_format(#{timeStart},'%y%m%d')
+                </if>
+                <if test="(timeEnd !=null and timeEnd != '')"><!-- 结束时间检索 -->
+                    and date_format(#{timeEnd},'%y%m%d') >= date_format(BZDATE,'%y%m%d')
+                </if>
+            </where>
+    </select>
+    <delete id="delete_medicalAdjust" parameterType="java.lang.String">
+            delete from fm_medical_adjust_gold
+            where ID = #{id,jdbcType=VARCHAR}
+        </delete>
+    <delete id="delete_medicalAdjust_item" parameterType="java.lang.String">
+            delete from fm_medical_adjust_gold_item
+            where ID = #{id,jdbcType=VARCHAR}
+        </delete>
+    <select id="query_medicalAdjust_item" parameterType="java.lang.String"  resultType="java.util.Map" >
+        SELECT  *  from fm_medical_adjust_gold
+          where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="query_medicalAdjust_item_table" parameterType="java.lang.String"  resultType="java.util.Map" >
+        SELECT  *   from  fm_medical_adjust_gold_item
+          where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deletefmMedicalAdjustItemByPK" parameterType="java.lang.String">
+            delete from fm_medical_adjust_gold_item
+            where ID = #{id,jdbcType=VARCHAR}
+        </delete>
+    <update id="shenhe_medicalAdjust" parameterType="java.util.Map">
+        update fm_medical_adjust_gold    set SP_STATUS=#{sp_status}
+        <if test="sp_status=='01'">
+            ,SBJBR=#{sp_name}
+        </if>
+        <if test="sp_status=='02'">
+            ,SBCZ=#{sp_name}
+        </if>
+        where ID=#{id}
+    </update>
+
+</mapper>

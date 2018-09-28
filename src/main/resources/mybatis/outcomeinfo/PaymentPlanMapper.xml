@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.sssfm.project.module.outcomeinfo.mapper.PaymentPlanMapper">
+
+        <select id="query_bankName" resultType="java.util.Map">
+            select distinct  bank_code VAL_ID,bank_name VAL from bank_account_manager
+        </select>
+
+        <select id="query_bankInfo" parameterType="java.util.Map" resultType="java.util.Map">
+            select bank_account VAL_ID,(concat(bank_account,'---',bank_hm)) VAL from bank_account_manager
+            <where>
+                <if test="bankCode !=null">
+                    bank_code=#{bankCode}
+                </if>
+            </where>
+        </select>
+
+        <update id="update_Gra_BankInfo" parameterType="java.util.Map">
+            update jf07_grafa set AAE008=(select bank_code from bank_account_manager where bank_code=#{bankCode} and bank_account=#{bankAccount}) ,
+                       AAE009=(select bank_hm from bank_account_manager where bank_code=#{bankCode} and bank_account=#{bankAccount}),
+                       AAE010=(select bank_account from bank_account_manager where bank_code=#{bankCode} and bank_account=#{bankAccount})
+            where AAZ031=#{AAZ031}
+
+        </update>
+
+        <update id="update_createPaymentPlan" parameterType="java.util.Map">
+            update jf07_grafa set BATCHNO=#{BatchNo},PAYMENT_STATUS='01'
+            where AAZ031=#{AAZ031}
+
+        </update>
+</mapper>

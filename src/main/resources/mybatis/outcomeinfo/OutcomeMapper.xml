@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.sssfm.project.module.outcomeinfo.mapper.OutcomeMapper">
+    <resultMap id="GraFaResultMap" type="com.ufgov.sssfm.project.module.outcomeinfo.bean.Jf07GraFa">
+        <result column="AAZ031"  property="aaz031" />
+        <result column="AAZ030"  property="aaz030" />
+        <result column="AAZ032"  property="aaz032" />
+        <result column="AAE008"  property="aae008" />
+        <result column="AAB070"  property="aab070" />
+        <result column="AAE009"  property="aae009" />
+        <result column="AAE010"  property="aae010" />
+        <result column="AAE140"  property="aae140" />
+        <result column="AAA079"  property="aaa079" />
+        <result column="AAE019"  property="aae019" />
+        <result column="AAE035"  property="aae035" />
+        <result column="AAE100"  property="aae100" />
+        <result column="AAB034"  property="aab034" />
+        <result column="AAE011"  property="aae011" />
+        <result column="AAE036"  property="aae036" />
+        <result column="RECIEVE_DATE"  property="recieve_date" />
+        <result column="SEND_STATUS"  property="send_status" />
+        <result column="BATCHNO"  property="batchno" />
+        <result column="PAYMENT_STATUS"  property="payment_status" />
+    </resultMap>
+
+    <resultMap id="FaResultMap" type="com.ufgov.sssfm.project.module.outcomeinfo.bean.Jf07Fa">
+        <result column="AAZ220"  property="aaz220" />
+        <result column="AAZ031"  property="aaz031" />
+        <result column="AAE140"  property="aae140" />
+        <result column="AAE002"  property="aae002" />
+        <result column="AAE003"  property="aae003" />
+        <result column="AAE008"  property="aae008" />
+        <result column="AAB070"  property="aab070" />
+        <result column="AAE009"  property="aae009" />
+        <result column="AAE010"  property="aae010" />
+        <result column="AAE019"  property="aae019" />
+        <result column="AAA028"  property="aaa028" />
+        <result column="AAZ010"  property="aaz010" />
+        <result column="AAB003"  property="aab003" />
+        <result column="AAB069"  property="aab069" />
+        <result column="AAE117"  property="aae117" />
+        <result column="AAE118"  property="aae118" />
+        <result column="AAE160"  property="aae160" />
+        <result column="AAE013"  property="aae013" />
+    </resultMap>
+
+    <resultMap id="SonResultMap" type="com.ufgov.sssfm.project.module.outcomeinfo.bean.Jf07Son">
+        <result column="AAZ219"  property="aaz219" />
+        <result column="AAZ220"  property="aaz220" />
+        <result column="AAA036"  property="aaa036" />
+        <result column="AAA085"  property="aaa085" />
+        <result column="AAA088"  property="aaa088" />
+        <result column="AAE002"  property="aae002" />
+        <result column="AAE003"  property="aae003" />
+        <result column="AAE019"  property="aae019" />
+        <result column="BIE505"  property="bie505" />
+        <result column="BIE504"  property="bie504" />
+        <result column="BIE506"  property="bie506" />
+        <result column="YW001"  property="yw001" />
+        <result column="YW002"  property="yw002" />
+        <result column="YW003"  property="yw003" />
+        <result column="YW004"  property="yw004" />
+        <result column="YW005"  property="yw005" />
+    </resultMap>
+
+
+    <select id="query_jf07_pagedata" parameterType="java.util.Map"  resultType="java.util.HashMap"  >
+
+		select * from jf07_grafa
+		<where>
+            <if test="(AAE140 !=null and AAE140 !='-1')">
+                AAE140=#{AAE140}
+            </if>
+            <if test="(AAA079 !=null and AAA079 !='-1')">
+                and AAA079=#{AAA079}
+            </if>
+            <if test="(AAE008 !=null and AAE008 !='-1')">
+                and AAE008=#{AAE008}
+            </if>
+            <if test="PAYMENT_STATUS !=null">
+                and PAYMENT_STATUS=#{PAYMENT_STATUS}
+            </if>
+            <if test="AAE035 !=null">
+                and str_to_date(AAE035,'%Y/%m/%d') =str_to_date(#{AAE035},'%Y%m%d')
+            </if>
+        </where>
+		limit #{PAGESTART} , #{PAGESIZE}
+
+	</select>
+
+    <select id="query_jf07_pagedata_total" parameterType="java.util.Map"  resultType="Integer"  >
+		select count(*) total from jf07_grafa
+        <where>
+            <if test="(AAE140 !=null and AAE140 !='-1')">
+                AAE140=#{AAE140}
+            </if>
+            <if test="(AAA079 !=null and AAA079 !='-1')">
+                and AAA079=#{AAA079}
+            </if>
+            <if test="(AAE008 !=null and AAE008 !='-1')">
+                and AAE008=#{AAE008}
+            </if>
+            <if test="AAE035 !=null">
+                and str_to_date(AAE035,'%Y/%m/%d') =str_to_date(#{AAE035},'%Y%m%d')
+            </if>
+        </where>
+	</select>
+
+    <select id="query_jf07_pagedata_item" parameterType="java.util.Map"  resultType="java.util.HashMap"  >
+
+        select * from jf07_fa
+        <where>
+            <if test="(AAZ031 !=null and AAZ031 !='-1')">
+                AAZ031=#{AAZ031}
+            </if>
+        </where>
+        limit #{PAGESTART} , #{PAGESIZE}
+
+    </select>
+
+    <select id="query_jf07_pagedata_item_total" parameterType="java.util.Map"  resultType="Integer"  >
+        select count(*) total from jf07_fa
+        <where>
+            <if test="(AAZ031 !=null and AAZ031 !='-1')">
+                AAZ031=#{AAZ031}
+            </if>
+        </where>
+    </select>
+
+    <select id="query_jf07_pagedata_child" parameterType="java.util.Map"  resultType="java.util.HashMap"  >
+
+        select * from jf07_son
+        <where>
+            <if test="(AAZ220 !=null and AAZ220 !='-1')">
+                AAZ220=#{AAZ220}
+            </if>
+        </where>
+        limit #{PAGESTART} , #{PAGESIZE}
+
+    </select>
+
+    <select id="query_jf07_pagedata_child_total" parameterType="java.util.Map"  resultType="Integer"  >
+        select count(*) total from jf07_son
+        <where>
+            <if test="(AAZ220 !=null and AAZ220 !='-1')">
+                AAZ220=#{AAZ220}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectJf07GraFaByPk"  parameterType="java.util.Map" 	resultMap="GraFaResultMap">
+        select * from jf07_grafa
+        <where>
+            <if test="AAZ031 != null">
+                AAZ031=#{AAZ031}
+            </if>
+        </where>
+
+
+    </select>
+
+    <select id="selectJf07FaByGraPk"  parameterType="java.util.Map" 	resultMap="FaResultMap">
+        select * from jf07_fa
+        <where>
+            <if test="AAZ031 != null">
+                AAZ031=#{AAZ031}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectJf07SonByFaPk"  parameterType="java.util.Map" 	resultMap="SonResultMap">
+        select * from jf07_son
+        <where>
+            <if test="AAZ220 != null">
+                AAZ220=#{AAZ220}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateGraSendStatusByPk" parameterType="java.util.Map">
+        update jf07_grafa
+        set SEND_STATUS = '01'
+        where AAZ031 = #{AAZ031}
+    </update>
+
+    <insert id="insert_Gra" parameterType="com.ufgov.sssfm.project.module.outcomeinfo.bean.Jf07GraFa">
+        insert into jf07_grafa (AAZ031, AAZ030, AAZ032,
+          AAE008, AAB070, AAE009,
+          AAE010, AAE140, AAA079,
+          AAE019, AAE035, AAE100,
+          AAB034, AAE011, AAE036
+          )
+        values (#{aaz031,jdbcType=VARCHAR}, #{aaz030,jdbcType=VARCHAR}, #{aaz032,jdbcType=VARCHAR},
+          #{aae008,jdbcType=VARCHAR}, #{aab070,jdbcType=VARCHAR}, #{aae009,jdbcType=VARCHAR},
+          #{aae010,jdbcType=VARCHAR}, #{aae140,jdbcType=VARCHAR}, #{aaa079,jdbcType=VARCHAR},
+          #{aae019,jdbcType=VARCHAR}, #{aae035,jdbcType=VARCHAR}, #{aae100,jdbcType=VARCHAR},
+          #{aab034,jdbcType=VARCHAR}, #{aae011,jdbcType=VARCHAR}, #{aae036,jdbcType=TIMESTAMP}
+          )
+    </insert>
+
+    <insert id="insert_Fa" parameterType="com.ufgov.sssfm.project.module.outcomeinfo.bean.Jf07Fa">
+        insert into jf07_fa (AAZ220, AAZ031, AAE140,
+          AAE002, AAE003, AAE008,
+          AAB070, AAE009, AAE010,
+          AAE019, AAA028, AAZ010,
+          AAB003, AAB069, AAE117,
+          AAE118, AAE160, AAE013
+          )
+        values (#{aaz220,jdbcType=VARCHAR}, #{aaz031,jdbcType=VARCHAR}, #{aae140,jdbcType=VARCHAR},
+          #{aae002,jdbcType=VARCHAR}, #{aae003,jdbcType=VARCHAR}, #{aae008,jdbcType=VARCHAR},
+          #{aab070,jdbcType=VARCHAR}, #{aae009,jdbcType=VARCHAR}, #{aae010,jdbcType=VARCHAR},
+          #{aae019,jdbcType=VARCHAR}, #{aaa028,jdbcType=VARCHAR}, #{aaz010,jdbcType=VARCHAR},
+          #{aab003,jdbcType=VARCHAR}, #{aab069,jdbcType=VARCHAR}, #{aae117,jdbcType=VARCHAR},
+          #{aae118,jdbcType=VARCHAR}, #{aae160,jdbcType=VARCHAR}, #{aae013,jdbcType=VARCHAR}
+          )
+    </insert>
+
+    <insert id="insert_Son" parameterType="com.ufgov.sssfm.project.module.outcomeinfo.bean.Jf07Son">
+        insert into jf07_son (AAZ219, AAZ220, AAA036,
+          AAA085, AAA088, AAE002,
+          AAE003, AAE019, BIE505,
+          BIE504, BIE506, YW001,
+          YW002, YW003, YW004,
+          YW005)
+        values (#{aaz219,jdbcType=VARCHAR}, #{aaz220,jdbcType=VARCHAR}, #{aaa036,jdbcType=VARCHAR},
+          #{aaa085,jdbcType=VARCHAR}, #{aaa088,jdbcType=VARCHAR}, #{aae002,jdbcType=VARCHAR},
+          #{aae003,jdbcType=VARCHAR}, #{aae019,jdbcType=DECIMAL}, #{bie505,jdbcType=VARCHAR},
+          #{bie504,jdbcType=TIMESTAMP}, #{bie506,jdbcType=VARCHAR}, #{yw001,jdbcType=VARCHAR},
+          #{yw002,jdbcType=VARCHAR}, #{yw003,jdbcType=VARCHAR}, #{yw004,jdbcType=VARCHAR},
+          #{yw005,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

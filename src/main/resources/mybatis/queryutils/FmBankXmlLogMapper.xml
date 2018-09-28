@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.sssfm.project.module.queryutils.mapper.FmBankXmlLogMapper">
+
+    <resultMap id="fmBankXmlLogResult" type="com.ufgov.sssfm.project.module.queryutils.bean.FmBankXmlLog">
+        <result column="DATA_TYPE" property="dataType"  />
+        <result column="SENDER_ID" property="senderId"  />
+        <result column="SEND_DATE" property="sendDate"  />
+        <result column="SERIAL_NUM" property="serialNum" />
+        <result column="PAY_DATE" property="payDate"  />
+        <result column="REC_NO" property="recNo"  />
+        <result column="REQUEST_XML" property="requestXml" />
+        <result column="RESULT_XML" property="resultXml" />
+        <result column="ERROR_MESSAGE" property="errorMessage"/>
+    </resultMap>
+
+
+    <select id="selectFmBankXmlLog" resultMap="fmBankXmlLogResult" parameterType="java.util.Map">
+        select * from FM_BANK_XML_LOG
+        <where>
+            <if test="dataType != null">
+                and DATA_TYPE = #{dataType}
+            </if>
+            <if test="senderId != null">
+                and SENDER_ID = #{senderId}
+            </if>
+            <if test="sendDate != null">
+                and TRUNC(SEND_DATE) = TRUNC(#{sendDate})
+            </if>
+            <if test="serialNum != null">
+                and SERIAL_NUM = #{serialNum}
+            </if>
+            <if test="payDate != null">
+                and PAY_DATE = #{payDate}
+            </if>
+            <if test="recNo != null">
+                and REC_NO = #{recNo}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertFmBankXmlLog" parameterType="com.ufgov.sssfm.project.module.queryutils.bean.FmBankXmlLog">
+		insert into FM_BANK_XML_LOG (DATA_TYPE, SENDER_ID, SEND_DATE, SERIAL_NUM, PAY_DATE, REC_NO, REQUEST_XML, ERROR_MESSAGE, RESULT_XML,DATA_ID)
+		values (#{dataType}, #{senderId}, #{sendDate}, #{serialNum}, #{payDate}, #{recNo}, #{requestXml}, #{errorMessage}, #{resultXml},#{dataId} )
+	</insert>
+
+
+</mapper>

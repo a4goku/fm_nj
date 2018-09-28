@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.sssfm.project.module.incomeinfo.mapper.IncomeMapper">
+    <resultMap id="Ad68SonResultMap" type="com.ufgov.sssfm.project.module.incomeinfo.entity.Ad68Son">
+        <result column="BIE001"  property="bie001" />
+        <result column="AAZ223"  property="aaz223" />
+        <result column="AAA028"  property="aaa028" />
+        <result column="AAZ010"  property="aaz010" />
+        <result column="AAB003"  property="aab003" />
+        <result column="AAB069"  property="aab069" />
+        <result column="AAE002"  property="aae002" />
+        <result column="AAE003"  property="aae003" />
+        <result column="AAE140"  property="aae140" />
+        <result column="AAA115"  property="aaa115" />
+        <result column="AAA157"  property="aaa157" />
+        <result column="BAE151"  property="bae151" />
+        <result column="AAE180"  property="aae180" />
+        <result column="AAE020"  property="aae020" />
+        <result column="AAE080"  property="aae080" />
+        <result column="AAE017"  property="aae017" />
+        <result column="AAE018"  property="aae018" />
+        <result column="BAE181"  property="bae181" />
+        <result column="AAB114"  property="aab114" />
+        <result column="ZBX001"  property="zbx001" />
+        <result column="ZBX002"  property="zbx002" />
+        <result column="ZBX003"  property="zbx003" />
+        <result column="ZBX004"  property="zbx004" />
+        <result column="ZBX005"  property="zbx005" />
+    </resultMap>
+
+    <resultMap id="Ad68FaResultMap" type="com.ufgov.sssfm.project.module.incomeinfo.entity.Ad68Fa">
+        <result column="BIE001"  property="bie001" />
+        <result column="BAE001"  property="bae001" />
+        <result column="AAB034"  property="aab034" />
+        <result column="AAA028"  property="aaa028" />
+        <result column="AAZ010"  property="aaz010" />
+        <result column="AAB003"  property="aab003" />
+        <result column="AAB069"  property="aab069" />
+        <result column="AAE002"  property="aae002" />
+        <result column="AAE003"  property="aae003" />
+        <result column="AAE140"  property="aae140" />
+        <result column="AAA116"  property="aaa116" />
+        <result column="AAE020"  property="aae020" />
+        <result column="AAB119"  property="aab119" />
+        <result column="AAE080"  property="aae080" />
+        <result column="AAE017"  property="aae017" />
+        <result column="AAE018"  property="aae018" />
+        <result column="AAC128"  property="aac128" />
+        <result column="AAB190"  property="aab190" />
+        <result column="AAB191"  property="aab191" />
+        <result column="AAE011"  property="aae011" />
+        <result column="AAE036"  property="aae036" />
+    </resultMap>
+
+
+    <select id="query_ad68_pagedata" parameterType="java.util.Map"  resultType="java.util.HashMap"  >
+
+		select * from ad68_fa
+        <where>
+            <if test="(AAE140 !=null and AAE140 !='-1')">
+                AAE140=#{AAE140}
+            </if>
+            <if test="(AAA116 !=null and AAA116 !='-1')">
+                and AAA116=#{AAA116}
+            </if>
+            <if test="AAE003 !=null">
+                and AAE003=#{AAE003}
+            </if>
+        </where>
+        limit  #{PAGESTART},#{PAGESIZE}
+
+	</select>
+
+    <select id="query_ad68_pagedata_total" parameterType="java.util.Map"  resultType="Integer"  >
+		select count(*) total from ad68_fa
+        <where>
+            <if test="(AAE140 !=null and AAE140 !='-1')">
+                AAE140=#{AAE140}
+            </if>
+            <if test="(AAA116 !=null and AAA116 !='-1')">
+                and AAA116=#{AAA116}
+            </if>
+            <if test="AAE003 !=null">
+                and  AAE003=#{AAE003}
+            </if>
+        </where>
+	</select>
+
+    <select id="query_ad68_pagedata_item" parameterType="java.util.Map"  resultType="java.util.HashMap"  >
+
+        select * from ad68_son
+        <where>
+            <if test="(BIE001 !=null and BIE001 !='-1')">
+                BIE001=#{BIE001}
+            </if>
+        </where>
+        limit  #{PAGESTART},#{PAGESIZE}
+
+    </select>
+
+    <select id="query_ad68_pagedata_item_total" parameterType="java.util.Map"  resultType="Integer"  >
+        select count(*) total from ad68_son
+        <where>
+            <if test="(BIE001 !=null and BIE001 !='-1')">
+                BIE001=#{BIE001}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert_Fa" parameterType="com.ufgov.sssfm.project.module.incomeinfo.entity.Ad68Fa">
+        insert into ad68_fa (BIE001, BAE001, AAB034,
+          AAA028, AAZ010, AAB003,
+          AAB069, AAE002, AAE003,
+          AAE140, AAA116, AAE020,
+          AAB119, AAE080, AAE017,
+          AAE018, AAC128, AAB190,
+          AAB191, AAE011, AAE036
+          )
+        values (#{bie001,jdbcType=VARCHAR}, #{bae001,jdbcType=VARCHAR}, #{aab034,jdbcType=VARCHAR},
+          #{aaa028,jdbcType=VARCHAR}, #{aaz010,jdbcType=VARCHAR}, #{aab003,jdbcType=VARCHAR},
+          #{aab069,jdbcType=VARCHAR}, #{aae002,jdbcType=VARCHAR}, #{aae003,jdbcType=VARCHAR},
+          #{aae140,jdbcType=VARCHAR}, #{aaa116,jdbcType=VARCHAR}, #{aae020,jdbcType=VARCHAR},
+          #{aab119,jdbcType=VARCHAR}, #{aae080,jdbcType=VARCHAR}, #{aae017,jdbcType=VARCHAR},
+          #{aae018,jdbcType=TIMESTAMP}, #{aac128,jdbcType=VARCHAR}, #{aab190,jdbcType=VARCHAR},
+          #{aab191,jdbcType=TIMESTAMP}, #{aae011,jdbcType=VARCHAR}, #{aae036,jdbcType=TIMESTAMP}
+          )
+  </insert>
+
+    <insert id="insert" parameterType="com.ufgov.sssfm.project.module.incomeinfo.entity.Ad68Son">
+    insert into ad68_son (BIE001, AAZ223, AAA028,
+      AAZ010, AAB003, AAB069,
+      AAE002, AAE003, AAE140,
+      AAA115, AAA157, BAE151,
+      AAE180, AAE020, AAE080,
+      AAE017, AAE018, BAE181,
+      AAB114, ZBX001, ZBX002,
+      ZBX003, ZBX004, ZBX005
+      )
+    values (#{bie001,jdbcType=VARCHAR}, #{aaz223,jdbcType=VARCHAR}, #{aaa028,jdbcType=VARCHAR},
+      #{aaz010,jdbcType=VARCHAR}, #{aab003,jdbcType=VARCHAR}, #{aab069,jdbcType=VARCHAR},
+      #{aae002,jdbcType=VARCHAR}, #{aae003,jdbcType=VARCHAR}, #{aae140,jdbcType=VARCHAR},
+      #{aaa115,jdbcType=VARCHAR}, #{aaa157,jdbcType=VARCHAR}, #{bae151,jdbcType=VARCHAR},
+      #{aae180,jdbcType=VARCHAR}, #{aae020,jdbcType=VARCHAR}, #{aae080,jdbcType=VARCHAR},
+      #{aae017,jdbcType=VARCHAR}, #{aae018,jdbcType=TIMESTAMP}, #{bae181,jdbcType=VARCHAR},
+      #{aab114,jdbcType=VARCHAR}, #{zbx001,jdbcType=VARCHAR}, #{zbx002,jdbcType=VARCHAR},
+      #{zbx003,jdbcType=VARCHAR}, #{zbx004,jdbcType=VARCHAR}, #{zbx005,jdbcType=VARCHAR}
+      )
+  </insert>
+</mapper>

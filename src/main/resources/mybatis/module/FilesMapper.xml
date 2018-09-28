@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufgov.sssfm.project.module.files.mapper.FilesMapper">
+    
+    <resultMap type="Files" id="FilesResult">
+        <result property="fileId"    column="file_id"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="fileType"    column="file_type"    />
+        <result property="filePath"    column="file_path"    />
+        <result property="billId"    column="bill_id"    />
+        <result property="seqNo"    column="seq_no"    />
+        <result property="creatTime"    column="creat_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectFilesVo">
+        select file_id, file_name, file_type, file_path, bill_id, seq_no, creat_time, remark from fm_files
+    </sql>
+	
+    <select id="selectFilesList" parameterType="Files" resultMap="FilesResult">
+        <include refid="selectFilesVo"/>
+        <where>  
+            <if test="fileId != null and fileId != ''"> and file_id = #{fileId}</if>
+             <if test="fileName != null and fileName != ''"> and file_name = #{fileName}</if>
+             <if test="fileType != null and fileType != ''"> and file_type = #{fileType}</if>
+             <if test="filePath != null and filePath != ''"> and file_path = #{filePath}</if>
+             <if test="billId != null and billId != ''"> and bill_id = #{billId}</if>
+             <if test="seqNo != null and seqNo != ''"> and seq_no = #{seqNo}</if>
+             <if test="creatTime != null "> and creat_time = #{creatTime}</if>
+             <if test="remark != null and remark != ''"> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectFilesById" parameterType="String" resultMap="FilesResult">
+        <include refid="selectFilesVo"/>
+        where file_id = #{fileId}
+    </select>
+
+    <select id="selectFilesListByBillId" parameterType="String" resultMap="FilesResult">
+        <include refid="selectFilesVo"/>
+        where bill_id = #{fileId}
+    </select>
+        
+    <insert id="insertFiles" parameterType="Files">
+        insert into fm_files
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fileId != null and fileId != '' ">file_id,</if>
+			<if test="fileName != null and fileName != '' ">file_name,</if>
+			<if test="fileType != null and fileType != '' ">file_type,</if>
+			<if test="filePath != null and filePath != '' ">file_path,</if>
+			<if test="billId != null and billId != '' ">bill_id,</if>
+			<if test="seqNo != null and seqNo != '' ">seq_no,</if>
+			<if test="creatTime != null">creat_time,</if>
+			<if test="remark != null and remark != '' ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fileId != null and fileId != ''">#{fileId},</if>
+			<if test="fileName != null and fileName != ''">#{fileName},</if>
+			<if test="fileType != null and fileType != ''">#{fileType},</if>
+			<if test="filePath != null and filePath != ''">#{filePath},</if>
+			<if test="billId != null and billId != ''">#{billId},</if>
+			<if test="seqNo != null and seqNo != ''">#{seqNo},</if>
+			<if test="creatTime != null ">#{creatTime},</if>
+			<if test="remark != null and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateFiles" parameterType="Files">
+        update fm_files
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileName != null  and fileName != ''  ">file_name = #{fileName},</if>
+            <if test="fileType != null  and fileType != ''  ">file_type = #{fileType},</if>
+            <if test="filePath != null  and filePath != ''  ">file_path = #{filePath},</if>
+            <if test="billId != null  and billId != ''  ">bill_id = #{billId},</if>
+            <if test="seqNo != null  ">seq_no = #{seqNo},</if>
+            <if test="creatTime != null  ">creat_time = #{creatTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where file_id = #{fileId}
+    </update>
+
+	<delete id="deleteFilesById" parameterType="String">
+        delete from fm_files where file_id = #{fileId}
+    </delete>
+	
+    <delete id="deleteFilesByIds" parameterType="String">
+        delete from fm_files where file_id in 
+        <foreach item="fileId" collection="array" open="(" separator="," close=")">
+            #{fileId}
+        </foreach>
+    </delete>
+    
+</mapper>

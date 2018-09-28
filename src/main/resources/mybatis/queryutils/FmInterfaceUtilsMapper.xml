@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.sssfm.project.module.queryutils.mapper.FmInterfaceUtilsMapper">
+
+    <resultMap id="BaseResultMap" type="com.ufgov.sssfm.project.module.queryutils.bean.FmInterfaceUtils">
+        <id column="transtowhere"   property="transtowhere" />
+        <id column="usertowhere"    property="usertowhere" />
+        <result column="esburl"     property="esburl" />
+        <result column="esbuserpwd_pwd"  property="esbuserpwdPwd" />
+        <result column="esbuserpwd_user"  property="esbuserpwdUser" />
+        <result column="org"  property="org" />
+        <result column="svid"  property="svid" />
+        <result column="sys"  property="sys" />
+        <result column="ver"  property="ver" />
+        <result column="backetname"  property="backetname" />
+        <result column="path"  property="path" />
+        <result column="uploadpath"  property="uploadpath" />
+        <result column="downloadpath"  property="downloadpath" />
+    </resultMap>
+
+    <select id="selectByPrimaryKey" parameterType="java.util.Map"  resultMap="BaseResultMap"  >
+        select * from fm_interface_utils
+        <where>
+            <if test="TRANSTOWHERE !=null">
+                transtowhere=#{TRANSTOWHERE}
+            </if>
+            <if test="USERTOWHERE !=null">
+                and  usertowhere=#{USERTOWHERE}
+            </if>
+        </where>
+    </select>
+
+</mapper>

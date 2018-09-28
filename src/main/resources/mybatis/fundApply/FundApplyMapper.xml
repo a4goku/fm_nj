@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.sssfm.project.module.fundApply.mapper.FunApplyMapper">
+    <resultMap id="FunApplyResultMap" type="com.ufgov.sssfm.project.module.fundApply.entity.FmBkApply">
+        <id column="BKD_ID" jdbcType="VARCHAR" property="bkdId" />
+        <result column="YEAR" jdbcType="VARCHAR" property="year" />
+        <result column="MONTH" jdbcType="VARCHAR" property="month" />
+        <result column="DAY" jdbcType="VARCHAR" property="day" />
+        <result column="XZ" jdbcType="VARCHAR" property="xz" />
+        <result column="MONTHEND" jdbcType="VARCHAR" property="monthend" />
+        <result column="LASTYEARLAST" jdbcType="VARCHAR" property="lastyearlast" />
+        <result column="THISYEARPRE" jdbcType="VARCHAR" property="thisyearpre" />
+        <result column="THISYEARPLUS" jdbcType="VARCHAR" property="thisyearplus" />
+        <result column="MONTHPLUS" jdbcType="VARCHAR" property="monthplus" />
+        <result column="LASTMONTHLAST" jdbcType="VARCHAR" property="lastmonthlast" />
+        <result column="THISMONTHAPPLY" jdbcType="VARCHAR" property="thismonthapply" />
+        <result column="BZ" jdbcType="VARCHAR" property="bz" />
+        <result column="TSBKONE" jdbcType="VARCHAR" property="tsbkone" />
+        <result column="TSBKTWO" jdbcType="VARCHAR" property="tsbktwo" />
+        <result column="TSBKTHREE" jdbcType="VARCHAR" property="tsbkthree" />
+        <result column="ACCOUNTONE" jdbcType="VARCHAR" property="accountone" />
+        <result column="BATCHNOONE" jdbcType="VARCHAR" property="batchnoone" />
+        <result column="BANKONE" jdbcType="VARCHAR" property="bankone" />
+        <result column="MONEYBIG" jdbcType="VARCHAR" property="moneybig" />
+        <result column="MONEYSMALL" jdbcType="VARCHAR" property="moneysmall" />
+        <result column="ACCOUNTTWO" jdbcType="VARCHAR" property="accounttwo" />
+        <result column="BATCHNOTWO" jdbcType="VARCHAR" property="batchnotwo" />
+        <result column="BANKTWO" jdbcType="VARCHAR" property="banktwo" />
+        <result column="SP_STATUS" jdbcType="VARCHAR" property="spstatus" />
+        <result column="SEND_STATUS" jdbcType="VARCHAR" property="sendstatus" />
+        <result column="PDF_ADDRESS" jdbcType="VARCHAR" property="pdfaddress" />
+        <result column="SQDWFZR" jdbcType="VARCHAR" property="sqdwfzr" />
+        <result column="SQDWSHR" jdbcType="VARCHAR" property="sqdwshr" />
+        <result column="SQDWJBR" jdbcType="VARCHAR" property="sqdwjbr" />
+        <result column="CZSBBZG" jdbcType="VARCHAR" property="czsbbzg" />
+        <result column="CZSBSHR" jdbcType="VARCHAR" property="czsbshr" />
+        <result column="CZSBLD" jdbcType="VARCHAR" property="czsbld" />
+        <result column="GKONE" jdbcType="VARCHAR" property="gkone" />
+        <result column="GKTWO" jdbcType="VARCHAR" property="gktwo" />
+        <result column="GKTHREE" jdbcType="VARCHAR" property="gkthree" />
+    </resultMap>
+
+    <insert id="insert_FmBkApply" parameterType="com.ufgov.sssfm.project.module.fundApply.entity.FmBkApply">
+        insert into fm_bk_apply (BKD_ID, YEAR, MONTH,
+              DAY, XZ, MONTHEND,
+              LASTYEARLAST, THISYEARPRE, THISYEARPLUS,
+              MONTHPLUS, LASTMONTHLAST, THISMONTHAPPLY,
+              BZ, TSBKONE, TSBKTWO,
+              TSBKTHREE, ACCOUNTONE, BATCHNOONE,
+              BANKONE, MONEYBIG, MONEYSMALL,
+              ACCOUNTTWO, BATCHNOTWO, BANKTWO,
+              SP_STATUS, SEND_STATUS, PDF_ADDRESS,
+              SQDWFZR, SQDWSHR, SQDWJBR,
+              CZSBBZG, CZSBSHR, CZSBLD,
+              GKONE, GKTWO, GKTHREE
+              )
+            values (#{bkdId,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR},
+              #{day,jdbcType=VARCHAR}, #{xz,jdbcType=VARCHAR}, #{monthend,jdbcType=VARCHAR},
+              #{lastyearlast,jdbcType=VARCHAR}, #{thisyearpre,jdbcType=VARCHAR}, #{thisyearplus,jdbcType=VARCHAR},
+              #{monthplus,jdbcType=VARCHAR}, #{lastmonthlast,jdbcType=VARCHAR}, #{thismonthapply,jdbcType=VARCHAR},
+              #{bz,jdbcType=VARCHAR}, #{tsbkone,jdbcType=VARCHAR}, #{tsbktwo,jdbcType=VARCHAR},
+              #{tsbkthree,jdbcType=VARCHAR}, #{accountone,jdbcType=VARCHAR}, #{batchnoone,jdbcType=VARCHAR},
+              #{bankone,jdbcType=VARCHAR}, #{moneybig,jdbcType=VARCHAR}, #{moneysmall,jdbcType=VARCHAR},
+              #{accounttwo,jdbcType=VARCHAR}, #{batchnotwo,jdbcType=VARCHAR}, #{banktwo,jdbcType=VARCHAR},
+              '00','00', #{pdfaddress,jdbcType=VARCHAR},
+              #{sqdwfzr,jdbcType=VARCHAR}, #{sqdwshr,jdbcType=VARCHAR}, #{sqdwjbr,jdbcType=VARCHAR},
+              #{czsbbzg,jdbcType=VARCHAR}, #{czsbshr,jdbcType=VARCHAR}, #{czsbld,jdbcType=VARCHAR},
+              #{gkone,jdbcType=VARCHAR}, #{gktwo,jdbcType=VARCHAR}, #{gkthree,jdbcType=VARCHAR}
+            )
+    </insert>
+
+
+    <select id="selectBKApplyByPK" parameterType="java.lang.String" resultMap="FunApplyResultMap">
+        select *
+        from fm_bk_apply
+        where BKD_ID = #{bkdId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteBKApplyByPK" parameterType="java.lang.String">
+        delete from fm_bk_apply where BKD_ID = #{bkdId,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="selectAllBkApplyTime" parameterType="java.util.Map" resultType="java.util.Map">
+        select BKD_ID,XZ,(concat(YEAR,MONTH,DAY)) SQSJ,ACCOUNTONE,BANKONE,BANKONE,THISMONTHAPPLY,SEND_STATUS,SP_STATUS,b.val SP_STATUS_NAME,PDF_ADDRESS
+            FROM fm_bk_apply a,fm_as_val b
+        <where>
+            a.SP_STATUS=b.VAL_ID and b.VALSET_ID='SP_STATUS'
+            <if test="send_status !=null">
+                and SEND_STATUS=#{send_status}
+            </if>
+            <if test="sp_status =='01'">
+                and SP_STATUS in('01','02','03')
+            </if>
+            <if test="sp_status =='02'">
+                and SP_STATUS in('02','03')
+            </if>
+        </where>
+    </select>
+
+    <update id="updateBkdSpStatus" parameterType="java.util.Map">
+
+        update fm_bk_apply set SP_STATUS=#{sp_status}
+         <if test="sp_status=='01'">
+             ,SQDWJBR=#{sp_name}
+         </if>
+         <if test="sp_status=='02'">
+            ,SQDWSHR=#{sp_name}
+         </if>
+         <if test="sp_status=='03'">
+            ,SQDWFZR=#{sp_name}
+         </if>
+         where BKD_ID=#{bkdId}
+
+    </update>
+
+    <update id="updateBkdSendStatus" parameterType="java.lang.String">
+
+        update fm_bk_apply set SEND_STATUS='01' where BKD_ID=#{bkdId}
+
+    </update>
+
+    <update id="updateBkdPdfAddress" parameterType="java.util.Map">
+
+        update fm_bk_apply set PDF_ADDRESS=#{fileName} where BKD_ID=#{bkdId}
+
+    </update>
+
+</mapper>

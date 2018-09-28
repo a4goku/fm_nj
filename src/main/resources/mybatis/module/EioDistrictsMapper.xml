@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufgov.sssfm.project.module.eioDistricts.mapper.EioDistrictsMapper">
+    
+    <resultMap type="EioDistricts" id="EioDistrictsResult">
+        <result property="nD"    column="ND"    />
+        <result property="distCode"    column="DIST_CODE"    />
+        <result property="distName"    column="DIST_NAME"    />
+        <result property="coCode"    column="CO_CODE"    />
+        <result property="coName"    column="CO_NAME"    />
+        <result property="isPfManage"    column="IS_PF_MANAGE"    />
+        <result property="isPoor"    column="IS_POOR"    />
+        <result property="poorType"    column="POOR_TYPE"    />
+        <result property="isResdepArea"    column="IS_RESDEP_AREA"    />
+        <result property="inputorId"    column="INPUTOR_ID"    />
+        <result property="inputorName"    column="INPUTOR_NAME"    />
+        <result property="cDATE"    column="CDATE"    />
+        <result property="rEMARK"    column="REMARK"    />
+        <result property="createBatch"    column="CREATE_BATCH"    />
+        <result property="splitBatch"    column="SPLIT_BATCH"    />
+        <result property="logicPDistCode"    column="LOGIC_P_DIST_CODE"    />
+        <result property="isUsed"    column="IS_USED"    />
+        <result property="pDistCode"    column="p_dist_code"    />
+        <result property="levelNum"    column="level_num"    />
+        <result property="isLeaf"    column="is_leaf"    />
+        <result property="isPoorCountry"    column="IS_POOR_COUNTRY"    />
+        <result property="isPoorPro"    column="IS_POOR_PRO"    />
+        <result property="isPoorOther"    column="IS_POOR_OTHER"    />
+    </resultMap>
+	
+	<sql id="selectEioDistrictsVo">
+        select ND, DIST_CODE, DIST_NAME, CO_CODE, CO_NAME, IS_PF_MANAGE, IS_POOR, POOR_TYPE, IS_RESDEP_AREA, INPUTOR_ID, INPUTOR_NAME, CDATE, REMARK, CREATE_BATCH, SPLIT_BATCH, LOGIC_P_DIST_CODE, IS_USED, p_dist_code, level_num, is_leaf, IS_POOR_COUNTRY, IS_POOR_PRO, IS_POOR_OTHER from sys_eio_districts
+    </sql>
+	
+    <select id="selectEioDistrictsList" parameterType="EioDistricts" resultMap="EioDistrictsResult">
+        <include refid="selectEioDistrictsVo"/>
+        <where>  
+            <if test="nD != null and nD != ''"> and ND = #{nD}</if>
+             <if test="distCode != null and distCode != ''"> and DIST_CODE = #{distCode}</if>
+             <if test="distName != null and distName != ''"> and DIST_NAME = #{distName}</if>
+             <if test="coCode != null and coCode != ''"> and CO_CODE = #{coCode}</if>
+             <if test="coName != null and coName != ''"> and CO_NAME = #{coName}</if>
+             <if test="isPfManage != null and isPfManage != ''"> and IS_PF_MANAGE = #{isPfManage}</if>
+             <if test="isPoor != null and isPoor != ''"> and IS_POOR = #{isPoor}</if>
+             <if test="poorType != null and poorType != ''"> and POOR_TYPE = #{poorType}</if>
+             <if test="isResdepArea != null and isResdepArea != ''"> and IS_RESDEP_AREA = #{isResdepArea}</if>
+             <if test="inputorId != null and inputorId != ''"> and INPUTOR_ID = #{inputorId}</if>
+             <if test="inputorName != null and inputorName != ''"> and INPUTOR_NAME = #{inputorName}</if>
+             <if test="cDATE != null and cDATE != ''"> and CDATE = #{cDATE}</if>
+             <if test="rEMARK != null and rEMARK != ''"> and REMARK = #{rEMARK}</if>
+             <if test="createBatch != null and createBatch != ''"> and CREATE_BATCH = #{createBatch}</if>
+             <if test="splitBatch != null and splitBatch != ''"> and SPLIT_BATCH = #{splitBatch}</if>
+             <if test="logicPDistCode != null and logicPDistCode != ''"> and LOGIC_P_DIST_CODE = #{logicPDistCode}</if>
+             <if test="isUsed != null and isUsed != ''"> and IS_USED = #{isUsed}</if>
+             <if test="pDistCode != null and pDistCode != ''"> and p_dist_code = #{pDistCode}</if>
+             <if test="levelNum != null and levelNum != ''"> and level_num = #{levelNum}</if>
+             <if test="isLeaf != null and isLeaf != ''"> and is_leaf = #{isLeaf}</if>
+             <if test="isPoorCountry != null and isPoorCountry != ''"> and IS_POOR_COUNTRY = #{isPoorCountry}</if>
+             <if test="isPoorPro != null and isPoorPro != ''"> and IS_POOR_PRO = #{isPoorPro}</if>
+             <if test="isPoorOther != null and isPoorOther != ''"> and IS_POOR_OTHER = #{isPoorOther}</if>
+         </where>
+    </select>
+    
+    <select id="selectEioDistrictsById" parameterType="Integer" resultMap="EioDistrictsResult">
+        <include refid="selectEioDistrictsVo"/>
+        where ND = #{nD}
+    </select>
+        
+    <insert id="insertEioDistricts" parameterType="EioDistricts">
+        insert into sys_eio_districts
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="nD != null and nD != '' ">ND,</if>
+			<if test="distCode != null and distCode != '' ">DIST_CODE,</if>
+			<if test="distName != null and distName != '' ">DIST_NAME,</if>
+			<if test="coCode != null and coCode != '' ">CO_CODE,</if>
+			<if test="coName != null and coName != '' ">CO_NAME,</if>
+			<if test="isPfManage != null and isPfManage != '' ">IS_PF_MANAGE,</if>
+			<if test="isPoor != null and isPoor != '' ">IS_POOR,</if>
+			<if test="poorType != null and poorType != '' ">POOR_TYPE,</if>
+			<if test="isResdepArea != null and isResdepArea != '' ">IS_RESDEP_AREA,</if>
+			<if test="inputorId != null and inputorId != '' ">INPUTOR_ID,</if>
+			<if test="inputorName != null and inputorName != '' ">INPUTOR_NAME,</if>
+			<if test="cDATE != null and cDATE != '' ">CDATE,</if>
+			<if test="rEMARK != null and rEMARK != '' ">REMARK,</if>
+			<if test="createBatch != null and createBatch != '' ">CREATE_BATCH,</if>
+			<if test="splitBatch != null and splitBatch != '' ">SPLIT_BATCH,</if>
+			<if test="logicPDistCode != null and logicPDistCode != '' ">LOGIC_P_DIST_CODE,</if>
+			<if test="isUsed != null and isUsed != '' ">IS_USED,</if>
+			<if test="pDistCode != null and pDistCode != '' ">p_dist_code,</if>
+			<if test="levelNum != null and levelNum != '' ">level_num,</if>
+			<if test="isLeaf != null and isLeaf != '' ">is_leaf,</if>
+			<if test="isPoorCountry != null and isPoorCountry != '' ">IS_POOR_COUNTRY,</if>
+			<if test="isPoorPro != null and isPoorPro != '' ">IS_POOR_PRO,</if>
+			<if test="isPoorOther != null and isPoorOther != '' ">IS_POOR_OTHER,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="nD != null and nD != ''">#{nD},</if>
+			<if test="distCode != null and distCode != ''">#{distCode},</if>
+			<if test="distName != null and distName != ''">#{distName},</if>
+			<if test="coCode != null and coCode != ''">#{coCode},</if>
+			<if test="coName != null and coName != ''">#{coName},</if>
+			<if test="isPfManage != null and isPfManage != ''">#{isPfManage},</if>
+			<if test="isPoor != null and isPoor != ''">#{isPoor},</if>
+			<if test="poorType != null and poorType != ''">#{poorType},</if>
+			<if test="isResdepArea != null and isResdepArea != ''">#{isResdepArea},</if>
+			<if test="inputorId != null and inputorId != ''">#{inputorId},</if>
+			<if test="inputorName != null and inputorName != ''">#{inputorName},</if>
+			<if test="cDATE != null and cDATE != ''">#{cDATE},</if>
+			<if test="rEMARK != null and rEMARK != ''">#{rEMARK},</if>
+			<if test="createBatch != null and createBatch != ''">#{createBatch},</if>
+			<if test="splitBatch != null and splitBatch != ''">#{splitBatch},</if>
+			<if test="logicPDistCode != null and logicPDistCode != ''">#{logicPDistCode},</if>
+			<if test="isUsed != null and isUsed != ''">#{isUsed},</if>
+			<if test="pDistCode != null and pDistCode != ''">#{pDistCode},</if>
+			<if test="levelNum != null and levelNum != ''">#{levelNum},</if>
+			<if test="isLeaf != null and isLeaf != ''">#{isLeaf},</if>
+			<if test="isPoorCountry != null and isPoorCountry != ''">#{isPoorCountry},</if>
+			<if test="isPoorPro != null and isPoorPro != ''">#{isPoorPro},</if>
+			<if test="isPoorOther != null and isPoorOther != ''">#{isPoorOther},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateEioDistricts" parameterType="EioDistricts">
+        update sys_eio_districts
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="distCode != null  and distCode != ''  ">DIST_CODE = #{distCode},</if>
+            <if test="distName != null  and distName != ''  ">DIST_NAME = #{distName},</if>
+            <if test="coCode != null  and coCode != ''  ">CO_CODE = #{coCode},</if>
+            <if test="coName != null  and coName != ''  ">CO_NAME = #{coName},</if>
+            <if test="isPfManage != null  and isPfManage != ''  ">IS_PF_MANAGE = #{isPfManage},</if>
+            <if test="isPoor != null  and isPoor != ''  ">IS_POOR = #{isPoor},</if>
+            <if test="poorType != null  and poorType != ''  ">POOR_TYPE = #{poorType},</if>
+            <if test="isResdepArea != null  and isResdepArea != ''  ">IS_RESDEP_AREA = #{isResdepArea},</if>
+            <if test="inputorId != null  and inputorId != ''  ">INPUTOR_ID = #{inputorId},</if>
+            <if test="inputorName != null  and inputorName != ''  ">INPUTOR_NAME = #{inputorName},</if>
+            <if test="cDATE != null  ">CDATE = #{cDATE},</if>
+            <if test="rEMARK != null  and rEMARK != ''  ">REMARK = #{rEMARK},</if>
+            <if test="createBatch != null  and createBatch != ''  ">CREATE_BATCH = #{createBatch},</if>
+            <if test="splitBatch != null  and splitBatch != ''  ">SPLIT_BATCH = #{splitBatch},</if>
+            <if test="logicPDistCode != null  and logicPDistCode != ''  ">LOGIC_P_DIST_CODE = #{logicPDistCode},</if>
+            <if test="isUsed != null  and isUsed != ''  ">IS_USED = #{isUsed},</if>
+            <if test="pDistCode != null  and pDistCode != ''  ">p_dist_code = #{pDistCode},</if>
+            <if test="levelNum != null  and levelNum != ''  ">level_num = #{levelNum},</if>
+            <if test="isLeaf != null  and isLeaf != ''  ">is_leaf = #{isLeaf},</if>
+            <if test="isPoorCountry != null  and isPoorCountry != ''  ">IS_POOR_COUNTRY = #{isPoorCountry},</if>
+            <if test="isPoorPro != null  and isPoorPro != ''  ">IS_POOR_PRO = #{isPoorPro},</if>
+            <if test="isPoorOther != null  and isPoorOther != ''  ">IS_POOR_OTHER = #{isPoorOther},</if>
+        </trim>
+        where ND = #{nD}
+    </update>
+
+	<delete id="deleteEioDistrictsById" parameterType="Integer">
+        delete from sys_eio_districts where ND = #{nD}
+    </delete>
+	
+    <delete id="deleteEioDistrictsByIds" parameterType="String">
+        delete from sys_eio_districts where ND in 
+        <foreach item="nD" collection="array" open="(" separator="," close=")">
+            #{nD}
+        </foreach>
+    </delete>
+    
+</mapper>

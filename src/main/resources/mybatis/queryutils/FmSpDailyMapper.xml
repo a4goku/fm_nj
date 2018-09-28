@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.sssfm.project.module.queryutils.mapper.FmSpDailyMapper">
+
+    <resultMap id="BaseResultMap" type="com.ufgov.sssfm.project.module.queryutils.bean.FmSpDaily">
+        <result column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="SP_BUSINESS" jdbcType="VARCHAR" property="spBusiness" />
+        <result column="CZ_FS" jdbcType="VARCHAR" property="czFs" />
+        <result column="CZ_PEOPLE" jdbcType="VARCHAR" property="czPeople" />
+        <result column="CZ_TIME" jdbcType="VARCHAR" property="czTime" />
+        <result column="CZ_NUM" jdbcType="INTEGER" property="czNum" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.ufgov.sssfm.project.module.queryutils.bean.FmSpDaily">
+            insert into fm_sp_daily (ID, SP_BUSINESS, CZ_FS,
+              CZ_PEOPLE, CZ_TIME, CZ_NUM
+              )
+            values (#{id,jdbcType=VARCHAR}, #{spBusiness,jdbcType=VARCHAR}, #{czFs,jdbcType=VARCHAR},
+              #{czPeople,jdbcType=VARCHAR}, #{czTime,jdbcType=VARCHAR},
+              (select b.max from (select if(max(cz_num) is  NULL ,1,(max(cz_num) + 1)) max from fm_sp_daily a where ID = #{id} and SP_BUSINESS=#{spBusiness})b)
+              )
+     </insert>
+    
+    <select id="select" parameterType="java.util.Map" resultMap="BaseResultMap">
+          select * from fm_sp_daily
+          <where>
+              <if test="id !=null">
+                  ID = #{id}
+              </if>
+              <if test="spBusiness !=null">
+                and   SP_BUSINESS=#{spBusiness}
+              </if>
+          order by CZ_NUM
+          </where>
+    </select>
+</mapper>
